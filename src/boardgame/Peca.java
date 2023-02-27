@@ -31,4 +31,5 @@ public abstract class Peca {
 		}
 		return false;	
 	}
+
 }
