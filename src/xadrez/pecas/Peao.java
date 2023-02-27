@@ -62,7 +62,7 @@ public class Peao extends PecaXadrez {
 	
 	@Override
 	public String toString() {
-		return "p";
+		return "P";
 	}
 
 }
