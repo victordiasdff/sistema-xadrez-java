@@ -45,6 +45,19 @@ public class Tabuleiro {
 		peca.posicao = posicao;
 	}
 	
+	public Peca removePeca(Posicao posicao) {
+		if (!posicaoExists(posicao)) {
+			throw new TabuleiroException("Posição fora do Tabuleiro ");
+		}
+		if (peca(posicao) == null) {
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		return aux;
+	}
+	
 	private boolean posicaoExists(int linha, int coluna) {
 		return linha >= 0 && linha < linhas && coluna >=0 && coluna < colunas;
 	}
@@ -54,9 +67,10 @@ public class Tabuleiro {
 	}
 	
 	public boolean haUmaPeca(Posicao posicao) {
-		if (haUmaPeca(posicao)) {
-			throw new TabuleiroException("Há uma peça nesta posição " + posicao);
+		if (!posicaoExists(posicao)) {
+			throw new TabuleiroException("Há uma peça nesta posição ");
 		}
 		return peca(posicao) != null;
 	}
 }
+

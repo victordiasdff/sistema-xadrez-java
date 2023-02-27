@@ -1,5 +1,6 @@
 package xadrez;
 
+import boardgame.Peca;
 import boardgame.Posicao;
 import boardgame.Tabuleiro;
 import xadrez.pecas.Rei;
@@ -24,17 +25,46 @@ public class PartidaXadrez {
 		return mat;
 	}
 	
+	public PecaXadrez performMovimentoXadrez(PosicaoXadrez origemPosicao, PosicaoXadrez alvoPosicao) {
+		Posicao origem = origemPosicao.toPosicao();
+		Posicao alvo = alvoPosicao.toPosicao();
+		validarOrigemPosicao(origem);
+		Peca capturarPeca = fazerMovimento(origem, alvo);
+		return (PecaXadrez)capturarPeca;
+	}
+	
+	private Peca fazerMovimento(Posicao origem, Posicao alvo) {
+		Peca p = tabuleiro.removePeca(origem);
+		Peca capturarPeca = tabuleiro.removePeca(alvo);
+		tabuleiro.lugarPeca(p, alvo);
+		return capturarPeca;
+	}
+	
+	private void validarOrigemPosicao(Posicao posicao) {
+		if(!tabuleiro.haUmaPeca(posicao)) {
+			throw new ExceptionXadrez("Não existe peça na posição de origem ");
+		}
+	}
+	
 	private void colocarNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		tabuleiro.lugarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
 	}
 	
 	private void setupInicial() {
-		colocarNovaPeca('B', 6, new Torre(tabuleiro, Cor.WHITE));
-		colocarNovaPeca('E', 8, new Rei(tabuleiro, Cor.BLACK));
-		colocarNovaPeca('E', 1, new Rei(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('C', 1, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('C', 2, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('D', 2, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('E', 2, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('E', 1, new Torre(tabuleiro, Cor.WHITE));
+		colocarNovaPeca('D', 1, new Rei(tabuleiro, Cor.WHITE));
 		
+		colocarNovaPeca('C', 7, new Torre(tabuleiro, Cor.BLACK));
+		colocarNovaPeca('C', 8, new Torre(tabuleiro, Cor.BLACK));
+		colocarNovaPeca('D', 7, new Torre(tabuleiro, Cor.BLACK));
+		colocarNovaPeca('E', 7, new Torre(tabuleiro, Cor.BLACK));
+		colocarNovaPeca('E', 8, new Torre(tabuleiro, Cor.BLACK));
+		colocarNovaPeca('D', 7, new Rei(tabuleiro, Cor.BLACK));
 		
-
 	}
 	
 }
