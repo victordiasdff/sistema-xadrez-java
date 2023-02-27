@@ -5,14 +5,14 @@ import boardgame.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
 
-public class Rei extends PecaXadrez {
+public class Cavalo extends PecaXadrez {
 
-	public Rei(Tabuleiro tabuleiro, Cor cor) {
+	public Cavalo(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro, cor);
 	}
 	@Override
 	public String toString() {
-		return "R";
+		return "C";
 	}
 	
 	private boolean podeMover(Posicao posicao) {
@@ -26,42 +26,42 @@ public class Rei extends PecaXadrez {
 		
 		Posicao p = new Posicao(0, 0);
 		
-		//Cima
-		p.setValores(posicao.getLinha() - 1, posicao.getColuna());
+
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() - 2);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Baixo
-		p.setValores(posicao.getLinha() + 1, posicao.getColuna());
+
+		p.setValores(posicao.getLinha() - 2, posicao.getColuna() - 2);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Esquerda
-		p.setValores(posicao.getLinha(), posicao.getColuna() - 1);
+
+		p.setValores(posicao.getLinha() - 2, posicao.getColuna() + 1);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Direita
-		p.setValores(posicao.getLinha(), posicao.getColuna() + 1);
+
+		p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 2);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Noroeste
-		p.setValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
+
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 2);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Nordeste
-		p.setValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
+
+		p.setValores(posicao.getLinha() + 2, posicao.getColuna() + 1);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
-		//Sudoeste
-		p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
+
+		p.setValores(posicao.getLinha() + 2, posicao.getColuna() - 1);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
-		//Sudeste
-		p.setValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
+
+		p.setValores(posicao.getLinha() + 1, posicao.getColuna() - 2);
 		if (getTabuleiro().posicaoExists(p) && podeMover(p)) {
 			mat[p.getLinha()][p.getColuna()] = true;
 		}
