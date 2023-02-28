@@ -102,6 +102,26 @@ public class PartidaXadrez {
 			pecasNoTabuleiro.remove(capturarPeca);
 			capturarPecas.add(capturarPeca);
 		}
+		//Movimento especial pequeno
+		
+		if (p instanceof Rei && alvo.getColuna() == origem.getColuna() + 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao alvoT = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaXadrez torre = (PecaXadrez)tabuleiro.removePeca(origemT);
+			tabuleiro.lugarPeca(torre, alvoT);
+			torre.incrementoContagemMovimento();
+		}
+		
+		//Movimento especial grande
+		
+		if (p instanceof Rei && alvo.getColuna() == origem.getColuna() - 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+			Posicao alvoT = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+			PecaXadrez torre = (PecaXadrez)tabuleiro.removePeca(origemT);
+			tabuleiro.lugarPeca(torre, alvoT);
+			torre.incrementoContagemMovimento();
+		}
+		
 		return capturarPeca;
 	}
 	private void desfazerMovimento(Posicao origem, Posicao alvo, Peca capturarPeca) {
@@ -114,6 +134,26 @@ public class PartidaXadrez {
 			capturarPecas.remove(capturarPeca);
 			pecasNoTabuleiro.add(capturarPeca);
 			
+		}
+		
+		//Desfazer Movimento Roque pequeno
+		
+		if (p instanceof Rei && alvo.getColuna() == origem.getColuna() + 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() + 3);
+			Posicao alvoT = new Posicao(origem.getLinha(), origem.getColuna() + 1);
+			PecaXadrez torre = (PecaXadrez)tabuleiro.removePeca(alvoT);
+			tabuleiro.lugarPeca(torre, origemT);
+			torre.decrementoContagemMovimento();
+				}
+				
+		//Desfazer Movimento Roque grande
+				
+		if (p instanceof Rei && alvo.getColuna() == origem.getColuna() - 2) {
+			Posicao origemT = new Posicao(origem.getLinha(), origem.getColuna() - 4);
+			Posicao alvoT = new Posicao(origem.getLinha(), origem.getColuna() - 1);
+			PecaXadrez torre = (PecaXadrez)tabuleiro.removePeca(alvoT);
+			tabuleiro.lugarPeca(torre, origemT);
+			torre.decrementoContagemMovimento();
 		}
 	}
 	

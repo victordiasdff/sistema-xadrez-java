@@ -93,8 +93,6 @@ public class Rei extends PecaXadrez {
 				}
 			}
 		}
-		
-		
 	}
 		return mat;
 
